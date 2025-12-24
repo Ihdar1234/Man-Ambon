@@ -16,7 +16,15 @@
                     {{ session('success') }}
                 </div>
             @endif
-
+@if ($errors->any())
+    <div class="alert alert-error mb-4">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
             <form 
     action="{{ isset($siswa)
         ? route('siswa.daftar.update', $siswa)
@@ -82,6 +90,35 @@
 
                 </div>
 
+                {{-- ================= DATA TAMBAHAN ================= --}}
+<div class="divider">Data Tambahan</div>
+
+<div class="grid md:grid-cols-2 gap-4">
+
+    <div>
+        <label class="label">Agama</label>
+        <input type="text" name="agama"
+            value="{{ old('agama', $siswa->agama ?? '') }}"
+            class="input input-bordered w-full">
+    </div>
+
+    <div>
+        <label class="label">Asal Sekolah</label>
+        <input type="text" name="asal_sekolah"
+            value="{{ old('asal_sekolah', $siswa->asal_sekolah ?? '') }}"
+            class="input input-bordered w-full">
+    </div>
+
+    <div>
+        <label class="label">No HP</label>
+        <input type="text" name="no_hp"
+            value="{{ old('no_hp', $siswa->no_hp ?? '') }}"
+            class="input input-bordered w-full">
+    </div>
+
+</div>
+
+
                 {{-- ================= ALAMAT ================= --}}
                 <div class="divider">Alamat</div>
 
@@ -117,23 +154,80 @@
 
                 </div>
 
-                {{-- ================= FOTO ================= --}}
-                <div class="divider">Foto</div>
+                   {{-- ================= DATA ORANG TUA ================= --}}
+<div class="divider">Data Orang Tua</div>
 
-                <input type="file" name="foto"
-                    class="file-input file-input-bordered w-full" />
+<div class="grid md:grid-cols-2 gap-4">
 
-                @isset($siswa->foto)
-                    <img src="{{ asset('storage/'.$siswa->foto) }}"
-                        class="w-24 rounded-lg mt-3">
-                @endisset
+    <div>
+        <label class="label">Nama Ayah</label>
+        <input type="text" name="nama_ayah"
+            value="{{ old('nama_ayah', $siswa->nama_ayah ?? '') }}"
+            class="input input-bordered w-full">
+    </div>
 
+    <div>
+        <label class="label">Pekerjaan Ayah</label>
+        <input type="text" name="pekerjaan_ayah"
+            value="{{ old('pekerjaan_ayah', $siswa->pekerjaan_ayah ?? '') }}"
+            class="input input-bordered w-full">
+    </div>
+
+    <div>
+        <label class="label">Nama Ibu</label>
+        <input type="text" name="nama_ibu"
+            value="{{ old('nama_ibu', $siswa->nama_ibu ?? '') }}"
+            class="input input-bordered w-full">
+    </div>
+
+    <div>
+        <label class="label">Pekerjaan Ibu</label>
+        <input type="text" name="pekerjaan_ibu"
+            value="{{ old('pekerjaan_ibu', $siswa->pekerjaan_ibu ?? '') }}"
+            class="input input-bordered w-full">
+    </div>
+
+    <div class="md:col-span-2">
+        <label class="label">Penghasilan Orang Tua</label>
+        <input type="text" name="penghasilan_ortu"
+            value="{{ old('penghasilan_ortu', $siswa->penghasilan_ortu ?? '') }}"
+            class="input input-bordered w-full"
+            placeholder="Contoh: < 1.000.000 / 1.000.000 - 3.000.000">
+    </div>
+
+</div>
+
+
+              {{-- ================= FOTO ================= --}}
+<div class="divider">Foto</div>
+
+<input type="file"
+       name="foto"
+       id="fotoInput"
+       accept="image/*"
+       class="file-input file-input-bordered w-full" />
+
+{{-- PREVIEW BARU --}}
+<img id="fotoPreview"
+     class="w-32 rounded-lg mt-3 hidden"
+     alt="Preview Foto">
+
+{{-- FOTO LAMA (EDIT) --}}
+@isset($siswa->foto)
+    <img src="{{ asset('storage/'.$siswa->foto) }}"
+         class="w-32 rounded-lg mt-3"
+         id="fotoLama">
+@endisset
+
+                
                 {{-- ================= TOMBOL ================= --}}
-                <div class="flex justify-end gap-3">
+                <div class="flex justify-end gap-3 mt-2">
                     <button class="btn btn-primary">
                         {{ isset($siswa) ? 'Update Data' : 'Simpan Pendaftaran' }}
                     </button>
                 </div>
+
+             
 
             </form>
 
@@ -222,6 +316,27 @@ document.addEventListener('DOMContentLoaded', async function () {
     district.addEventListener('change', e => loadVillages(e.target.value));
 
     loadProvinces();
+});
+
+document.getElementById('fotoInput')?.addEventListener('change', function (e) {
+    const file = e.target.files[0];
+    const preview = document.getElementById('fotoPreview');
+    const fotoLama = document.getElementById('fotoLama');
+
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function (event) {
+        preview.src = event.target.result;
+        preview.classList.remove('hidden');
+
+        // sembunyikan foto lama jika ada
+        if (fotoLama) {
+            fotoLama.classList.add('hidden');
+        }
+    };
+
+    reader.readAsDataURL(file);
 });
 </script>
 

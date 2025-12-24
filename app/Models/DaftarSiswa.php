@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravolt\Indonesia\Models\Province;
-use Laravolt\Indonesia\Models\Regency;
+use Laravolt\Indonesia\Models\City;
 use Laravolt\Indonesia\Models\District;
 use Laravolt\Indonesia\Models\Village;
+
 
 class DaftarSiswa extends Model
 {
@@ -15,35 +16,17 @@ class DaftarSiswa extends Model
 
     protected $table = 'daftar_siswas';
 
-    protected $fillable = [
+   protected $fillable = [
         'user_id',
-        'nisn',
-        'nik',
-        'nama_lengkap',
-        'tempat_lahir',
-        'tanggal_lahir',
-        'jenis_kelamin',
-        'agama',
-        'asal_sekolah',
-        'no_hp',
-        'nama_ayah',
-        'nama_ibu',
-        'pekerjaan_ayah',
-        'pekerjaan_ibu',
+        'province_id','city_id','district_id','village_id',
+        'rt','rw','detail_alamat',
+        'nisn','nik','nama_lengkap','tempat_lahir','tanggal_lahir',
+        'jenis_kelamin','agama','asal_sekolah','no_hp',
+        'nama_ayah','nama_ibu','pekerjaan_ayah','pekerjaan_ibu',
         'penghasilan_ortu',
-        'foto',
-        'status',
-
-        // ✔ sesuai MIGRASI
-        'province_id',
-        'city_id',
-        'district_id',
-        'village_id',
-
-        'rt',
-        'rw',
-        'detail_alamat'
+        'foto','status',
     ];
+
 
     protected $casts = [
         'tanggal_lahir' => 'date',
@@ -56,24 +39,25 @@ class DaftarSiswa extends Model
     }
 
     // Relasi ke Laravolt Indonesia
-    public function province()
-    {
-        return $this->belongsTo(Province::class, 'province_id', 'code');
-    }
+public function province()
+{
+    return $this->belongsTo(Province::class, 'province_id', 'code');
+}
 
-    public function city()
-    {
-        return $this->belongsTo(Regency::class, 'city_id', 'code');
-    }
+public function city()
+{
+    return $this->belongsTo(City::class, 'city_id', 'code');
+}
 
-    public function district()
-    {
-        return $this->belongsTo(District::class, 'district_id', 'code');
-    }
+public function district()
+{
+    return $this->belongsTo(District::class, 'district_id', 'code');
+}
 
-    public function village()
-    {
-        return $this->belongsTo(Village::class, 'village_id', 'code');
-    }
+public function village()
+{
+    return $this->belongsTo(Village::class, 'village_id', 'code');
+}
+
 
 }

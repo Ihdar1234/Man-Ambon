@@ -258,28 +258,26 @@ Route::post('/ptsp/store', [PTSPController::class, 'store'])->name('ptsp.store')
 
 
 Route::get('/ajax/provinces', function () {
-    return Province::select('code as id', 'name')
-        ->orderBy('name')
-        ->get();
+    return Province::select('code', 'name')->orderBy('name')->get();
 });
 
 Route::get('/ajax/cities/{province}', function ($province) {
     return City::where('province_code', $province)
-        ->select('code as id', 'name')
+        ->select('code', 'name')
         ->orderBy('name')
         ->get();
 });
 
 Route::get('/ajax/districts/{city}', function ($city) {
     return District::where('city_code', $city)
-        ->select('code as id', 'name')
+        ->select('code', 'name')
         ->orderBy('name')
         ->get();
 });
 
 Route::get('/ajax/villages/{district}', function ($district) {
     return Village::where('district_code', $district)
-        ->select('code as id', 'name')
+        ->select('code', 'name')
         ->orderBy('name')
         ->get();
 });
