@@ -1,0 +1,38 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.17",
+    "@tailwindcss/vite": "^4.1.17",
+    "autoprefixer": "^10.4.22",
+    "axios": "^1.11.0",
+    "daisyui": "^5.5.5",
+    "laravel-vite-plugin": "^2.0.1",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.0.0",
+    "vite": "^7.2.2"
+  },
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.19",
+    "alpinejs": "^3.15.0",
+    "aos": "^2.3.4",
+    "bootstrap-icons": "^1.13.1",
+    "flowbite": "^4.0.1",
+    "lucide": "^0.554.0",
+    "swiper": "^12.0.3"
+  },
+  "name": "man-ambon",
+  "version": "1.0.0",
+  "description": "<p align=\"center\"><a href=\"https://laravel.com\" target=\"_blank\"><img src=\"https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg\" width=\"400\" alt=\"Laravel Logo\"></a></p>",
+  "main": "postcss.config.js",
+  "directories": {
+    "test": "tests"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

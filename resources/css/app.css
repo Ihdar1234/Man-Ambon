@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+@theme {
+  /* Contoh definisi tema kustom dengan CSS variable: */
+  --color-primary: #3b82f6;
+  --color-secondary: #f97316;
+  /* Lanjutkan variabel tema sesuai kebutuhan */
+}
