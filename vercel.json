@@ -17,6 +17,16 @@
             "src": "/storage/(.*)",
             "dest": "/public/storage/"
         },
+
+         {
+            "src": "/storage/(.*)",
+            "dest": "/public/storage/artikel-content/"
+        },
+
+          {
+            "src": "/storage/(.*)",
+            "dest": "/public/storage/avatars/"
+        },
        
         {
             "src": "/uploads/(.*)",
