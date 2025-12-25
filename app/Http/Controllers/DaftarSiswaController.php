@@ -6,7 +6,7 @@ use App\Models\DaftarSiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
-
+use Laravolt\Indonesia\Models\Province;
 
 class DaftarSiswaController extends Controller
 {
@@ -90,7 +90,7 @@ public function store(Request $request)
     public function edit(DaftarSiswa $daftar)
     {
       
-
+   $provinces = Province::all();
     return view('siswa.daftar.edit', compact('daftar', 'provinces'));
     }
 
